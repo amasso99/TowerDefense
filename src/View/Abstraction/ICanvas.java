@@ -3,7 +3,7 @@ package View.Abstraction;
 import java.awt.*;
 
 /**
- * Base interface for all Drawing contexts that want to support {@link IDrawableObject}s
+ * GeneralBase interface for all Drawing contexts that want to support {@link IDrawableObject}s
  */
 public interface ICanvas {
     /**
