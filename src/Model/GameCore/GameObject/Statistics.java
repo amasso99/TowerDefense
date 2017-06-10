@@ -5,9 +5,10 @@ package Model.GameCore.GameObject;
  */
 public class Statistics {
     int attack, health, range, attackSpeed, speed, armor,actHealth;
+    boolean ground, aimsGround;
     int level;
 
-    public Statistics(int attack, int range, int health, int attackSpeed, int speed, int armor, int level) {
+    public Statistics(int attack, int range, int health, int attackSpeed, int speed, int armor, boolean ground, boolean aimsGround, int level) {
         this.attack = attack;
         this.range = range;
         this.health = health;
@@ -15,6 +16,8 @@ public class Statistics {
         this.speed = speed;
         this.armor = armor;
         this.actHealth = health;
+        this.ground = ground;
+        this.aimsGround = aimsGround;
         this.level = level;
     }
 
@@ -84,5 +87,21 @@ public class Statistics {
 
     public void setArmor(int armor) {
         this.armor = armor;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public boolean isGround() {
+        return ground;
+    }
+
+    public boolean isAimsGround() {
+        return aimsGround;
     }
 }

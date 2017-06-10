@@ -17,17 +17,20 @@ public class Button implements IInteractableObject {
     private Image img;
     private ActionEvent event;
     private int x,y,width,height;
+    private Font font;
     private Shape shape;
 
     private ICanvas canvas;
 
-    public Button(String text, int x, int y,int width, int height, String id){
+
+    public Button(String text, int x, int y,int width, int height, String id, Font font){
         this.text = text;
         this.id = id;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.font = font;
         shape = new Rectangle(x,y,width,height);
     }
 
@@ -47,10 +50,17 @@ public class Button implements IInteractableObject {
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
 
+        FontMetrics metrics = g2d.getFontMetrics(font);
+        int fontHeight = metrics.getHeight();
+        int fontWidth = metrics.stringWidth(text);
+
         if(img == null){
             g2d.setColor(Color.BLACK);
-            g2d.drawString(text,x,y);
+            g2d.drawString(text,x + fontWidth,y + fontHeight/2);
         }
+
+        g2d.setColor(new Color(50,50,50));
+        g2d.drawRect(x,y,width,height);
     }
 
     @Override
@@ -86,6 +96,11 @@ public class Button implements IInteractableObject {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         PointerInfo info = MouseInfo.getPointerInfo();
         if(info!= null){
             if(shape.contains(info.getLocation())){
@@ -94,10 +109,5 @@ public class Button implements IInteractableObject {
                 }
             }
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 }
