@@ -34,6 +34,10 @@ public class Button implements IInteractableObject {
         shape = new Rectangle(x,y,width,height);
     }
 
+    public Button(String text, double x, double y,double width, double height, String id, Font font){
+        this(text,(int)x,(int)y,(int)width,(int)height,id,font);
+    }
+
 
     public Button(Image img, int x, int y, String id){
         this.img = img;
@@ -50,17 +54,17 @@ public class Button implements IInteractableObject {
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
 
-        FontMetrics metrics = g2d.getFontMetrics(font);
-        int fontHeight = metrics.getHeight();
-        int fontWidth = metrics.stringWidth(text);
-
         if(img == null){
+            FontMetrics metrics = g2d.getFontMetrics(font);
+            int fontHeight = metrics.getHeight();
+            int fontWidth = metrics.stringWidth(text);
             g2d.setColor(Color.BLACK);
-            g2d.drawString(text,x + fontWidth,y + fontHeight/2);
-        }
+            g2d.drawString(text, (int) (x + width/2 - fontWidth*0.5),y + height/2);
+            g2d.setColor(new Color(50, 50, 50));
+            g2d.drawRect(x, y, width, height);
+        }else{
 
-        g2d.setColor(new Color(50,50,50));
-        g2d.drawRect(x,y,width,height);
+        }
     }
 
     @Override

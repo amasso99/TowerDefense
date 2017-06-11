@@ -1,10 +1,9 @@
 package Model.UI.Screen;
 
+import Control.ScreenController;
 import Model.UI.ActionEvent;
 import Model.UI.Button;
-import Model.UI.Label;
 import View.Panel.DrawingPanel;
-import javafx.scene.text.Font;
 
 import java.awt.*;
 
@@ -13,22 +12,36 @@ import java.awt.*;
  */
 public class MainScreen extends DrawingPanel implements ActionEvent {
 
-    public MainScreen(){
-        java.awt.Font f = new java.awt.Font("Arial", java.awt.Font.PLAIN,22);
-        Label label = new Label(500,500,"ES GEHT", null );
-        addObject(label);
+    private Font f;
+    private ScreenController screens;
 
-        Button button = new Button("Exit",100,100,100,16,"exit",f);
-        button.setActionListener(this);
+    public MainScreen(ScreenController screenController){
+        this.screens = screenController;
 
-        addObject(button);
+        f = new Font("Arial", Font.PLAIN,50);
+        initAndAddObjects();
+    }
+
+    private void initAndAddObjects() {
+        Button btnExit = new Button("Exit",screenWidth*0.2,screenHeight*0.6,screenWidth*0.6,screenHeight*0.1,"exit",f);
+        btnExit.setActionListener(this);
+        addObject(btnExit);
+
+        Button btnStart = new Button("Start",screenWidth*0.2,screenHeight*0.3,screenWidth*0.6,screenHeight*0.1,"start",f);
+        btnStart.setActionListener(this);
+        addObject(btnStart);
 
     }
 
     @Override
     public void doAction(String id) {
-        if(id.equalsIgnoreCase("exit")){
-            System.exit(0);
+        switch (id){
+            case("start"):
+                screens.switchScreen(ScreenController.Type.GAME_SCREEN);
+                break;
+            case("exit"):
+                System.exit(0);
+                break;
         }
     }
 }
