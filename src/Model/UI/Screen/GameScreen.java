@@ -1,34 +1,43 @@
 package Model.UI.Screen;
 
 import Control.ScreenController;
-import Model.UI.ActionEvent;
+import Model.DataStructure.List;
+import Model.GameCore.GameMap;
+import Model.GameCore.GameObject.Base.GeneralBase;
 import View.Panel.DrawingPanel;
 
-import java.awt.*;
-
 /**
- * Created by Oussama on 11.06.2017.
+ * Created by 204g07 on 12.06.2017.
  */
-public class GameScreen extends DrawingPanel implements ActionEvent {
+public class GameScreen extends DrawingPanel {
 
-    private Font f;
-    private ScreenController screens;
+    private ScreenController screenController;
+    private GameMap gameMap;
 
     public GameScreen(ScreenController screenController){
-        this.screens = screenController;
-
-        f = new Font("Arial", Font.PLAIN,50);
-        initAndAddObjects();
+        this.screenController = screenController;
+        initAndAddObject();
     }
 
-    private void initAndAddObjects() {
+    private void initAndAddObject() {
+        gameMap = new GameMap(screenWidth*0.95,screenHeight*0.75,0.025*screenWidth,0.05*screenHeight);
+        addObject(gameMap);
+
+        List<GeneralBase> base = new List<>();
+        base.insert(new GeneralBase());
+        base.insert(new GeneralBase());
+        gameMap.addBaseRow(base);
+
+        base = new List<>();
+        base.insert(new GeneralBase());
+        base.insert(new GeneralBase());
+        base.insert(new GeneralBase());
+        gameMap.addBaseRow(base);
+
+
+        base = new List<>();
+        base.insert(new GeneralBase());
+        gameMap.addBaseRow(base);
 
     }
-
-    @Override
-    public void doAction(String id) {
-        switch (id){
-        }
-    }
-
 }

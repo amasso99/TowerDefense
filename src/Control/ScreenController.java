@@ -32,8 +32,8 @@ public class ScreenController {
         gameScreen = new GameScreen(this);
     }
 
-    public void switchScreen(Type type) {
-        switch (type) {
+    public void switchScreen(Type type){
+        switch (type){
             case MAIN_SCREEN:
                 frame.setContentPanel(mainScreen);
                 break;
@@ -41,5 +41,7 @@ public class ScreenController {
                 frame.setContentPanel(gameScreen);
                 break;
         }
+
     }
+
 }

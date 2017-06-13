@@ -144,4 +144,12 @@ public final class Utils {
     public static void print(List<?> list) {
         System.out.println(toString(list));
     }
+
+    public static int altSize(List<?> list){
+        int size = 0;
+        for(list.toFirst();list.hasAccess();list.next()){
+            size++;
+        }
+        return size;
+    }
 }
