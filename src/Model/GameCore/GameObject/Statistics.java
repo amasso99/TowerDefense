@@ -4,10 +4,9 @@ package Model.GameCore.GameObject;
  * Created by 204g07 on 02.06.2017.
  */
 public class Statistics {
-    int attack, health, range, attackSpeed, speed,actHealth, mana;
+    int attack, health, range, attackSpeed, speed, currentHealth, mana, level;
     double armor;
     boolean ground, aimsGround;
-    int level;
 
     public Statistics(int attack, int range, int health, int attackSpeed, int speed, double armor, boolean ground, boolean aimsGround, int level, int cost) {
         this.attack = attack;
@@ -16,7 +15,7 @@ public class Statistics {
         this.attackSpeed = attackSpeed;
         this.speed = speed;
         this.armor = armor;
-        this.actHealth = health;
+        this.currentHealth = health;
         this.ground = ground;
         this.aimsGround = aimsGround;
         this.level = level;
@@ -24,16 +23,19 @@ public class Statistics {
     }
 
     public void levelUp(){
-        double percent = actHealth/health;
-        this.attack = (int) (1.2*attack);
-        this.range = (int) (range*1.1);
-        this.health = (int) (health*1.2);
-        this.attackSpeed = (int) (1.1*attackSpeed);
-        this.speed = (int) (1.2*speed);
-        this.armor = armor*1.1;
-        this.actHealth = (int) (health * percent);
+        double percent = currentHealth / health;
+        this.attack = (int) (1.2 * attack);
+        this.range = (int) (range * 1.1);
+        this.health = (int) (health * 1.2);
+        this.attackSpeed = (int) (1.1 * attackSpeed);
+        this.speed = (int) (1.1 * speed);
+        this.armor = armor * 1.1;
         this.level++;
-        this.mana = (int) (mana * 1.2);
+        if(level < 5) {
+            this.mana = (int) (mana * 1.2);
+        } else {
+            this.mana = (int) (mana * 1.1);
+        }
     }
 
     public int getAttack() {
@@ -76,12 +78,12 @@ public class Statistics {
         this.speed = speed;
     }
 
-    public int getActHealth() {
-        return actHealth;
+    public int getCurrentHealth() {
+        return currentHealth;
     }
 
-    public void setActHealth(int actHealth) {
-        this.actHealth = actHealth;
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
     }
 
     public double getArmor() {
