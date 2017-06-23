@@ -4,11 +4,12 @@ package Model.GameCore.GameObject;
  * Created by 204g07 on 02.06.2017.
  */
 public class Statistics {
-    int attack, health, range, attackSpeed, speed, armor,actHealth;
+    int attack, health, range, attackSpeed, speed,actHealth, mana;
+    double armor;
     boolean ground, aimsGround;
     int level;
 
-    public Statistics(int attack, int range, int health, int attackSpeed, int speed, int armor, boolean ground, boolean aimsGround, int level) {
+    public Statistics(int attack, int range, int health, int attackSpeed, int speed, double armor, boolean ground, boolean aimsGround, int level, int cost) {
         this.attack = attack;
         this.range = range;
         this.health = health;
@@ -19,6 +20,7 @@ public class Statistics {
         this.ground = ground;
         this.aimsGround = aimsGround;
         this.level = level;
+        this.mana = cost;
     }
 
     public void levelUp(){
@@ -28,9 +30,10 @@ public class Statistics {
         this.health = (int) (health*1.2);
         this.attackSpeed = (int) (1.1*attackSpeed);
         this.speed = (int) (1.2*speed);
-        this.armor = (int) (armor*1.1);
+        this.armor = armor*1.1;
         this.actHealth = (int) (health * percent);
         this.level++;
+        this.mana = (int) (mana * 1.2);
     }
 
     public int getAttack() {
@@ -81,11 +84,11 @@ public class Statistics {
         this.actHealth = actHealth;
     }
 
-    public int getArmor() {
+    public double getArmor() {
         return armor;
     }
 
-    public void setArmor(int armor) {
+    public void setArmor(double armor) {
         this.armor = armor;
     }
 
@@ -103,5 +106,21 @@ public class Statistics {
 
     public boolean isAimsGround() {
         return aimsGround;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public void setGround(boolean ground) {
+        this.ground = ground;
+    }
+
+    public void setAimsGround(boolean aimsGround) {
+        this.aimsGround = aimsGround;
     }
 }

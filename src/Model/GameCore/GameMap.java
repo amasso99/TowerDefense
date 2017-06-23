@@ -28,7 +28,7 @@ public class GameMap implements IDrawableObject{
     private Graph map;
     private ICanvas canvas;
 
-    private List<List<GeneralBase>>alllign;
+    private List<List<GeneralBase>> alllign;
 
     public GameMap(double width, double height, double x, double y){
         this.width = (int) width;
