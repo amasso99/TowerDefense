@@ -1,6 +1,7 @@
 package Model.UI.Screen;
 
 import Control.ScreenController;
+import Model.DataStructure.Extended.Utils;
 import Model.DataStructure.List;
 import Model.GameCore.GameMap;
 import Model.GameCore.GameObject.Base.GeneralBase;
@@ -24,19 +25,34 @@ public class GameScreen extends DrawingPanel {
         addObject(gameMap);
 
         List<GeneralBase> base = new List<>();
-        base.insert(new GeneralBase());
-        base.insert(new GeneralBase());
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
         gameMap.addBaseRow(base);
 
         base = new List<>();
-        base.insert(new GeneralBase());
-        base.insert(new GeneralBase());
-        base.insert(new GeneralBase());
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
         gameMap.addBaseRow(base);
 
 
         base = new List<>();
-        base.insert(new GeneralBase());
+        base.append(new GeneralBase());
+        gameMap.addBaseRow(base);
+
+
+        base = new List<>();
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
+        gameMap.addBaseRow(base);
+
+
+        base = new List<>();
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
+        base.append(new GeneralBase());
         gameMap.addBaseRow(base);
 
     }
