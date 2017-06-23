@@ -37,7 +37,7 @@ public class Statistics {
     }
 
     public void receiveDamage(int ad){
-        actHealth = actHealth - (ad*(100 /(100+armor)));
+        actHealth = (int) (actHealth - (ad*(100 /(100+armor))));
     }
 
     public int getAttack() {

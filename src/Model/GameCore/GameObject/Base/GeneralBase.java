@@ -3,6 +3,7 @@ package Model.GameCore.GameObject.Base;
 import Model.Constants;
 import Model.GameCore.GameObject.GeneralGameObject;
 import Model.GameCore.GameObject.Statistics;
+import Model.GameCore.GameObject.UnitType;
 
 import java.awt.*;
 
@@ -15,6 +16,10 @@ public class GeneralBase extends GeneralGameObject{
     public GeneralBase(Statistics statistics){
         super(statistics);
 
+    }
+
+    public GeneralBase() {
+        super(UnitType.ARCHER.getStats());
     }
 
     @Override

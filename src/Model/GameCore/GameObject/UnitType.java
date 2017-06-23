@@ -16,4 +16,8 @@ public enum UnitType { //attack,range,health,attackSpeed,speed,armor,ground,aims
     UnitType(Statistics stats){
         this.stats = stats;
     }
+
+    public Statistics getStats() {
+        return stats;
+    }
 }
