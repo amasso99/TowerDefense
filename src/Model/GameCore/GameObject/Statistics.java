@@ -23,7 +23,6 @@ public class Statistics {
     }
 
     public void levelUp(){
-        double percent = currentHealth / health;
         this.attack = (int) (1.2 * attack);
         this.range = (int) (range * 1.1);
         this.health = (int) (health * 1.2);
@@ -39,7 +38,7 @@ public class Statistics {
     }
 
     public void receiveDamage(int ad){
-        actHealth = (int) (actHealth - (ad*(100 /(100+armor))));
+        currentHealth = (int) (currentHealth - (ad*(100 /(100+armor))));
     }
 
     public int getAttack() {
