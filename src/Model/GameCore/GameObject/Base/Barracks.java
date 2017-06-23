@@ -1,6 +1,7 @@
 package Model.GameCore.GameObject.Base;
 
 import Model.GameCore.GameObject.GeneralGameObject;
+import Model.GameCore.GameObject.Statistics;
 
 import java.awt.*;
 
@@ -9,4 +10,7 @@ import java.awt.*;
  */
 public class Barracks extends GeneralBase {
 
+    public Barracks(Statistics statistics) {
+        super(statistics);
+    }
 }

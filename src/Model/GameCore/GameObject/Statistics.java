@@ -33,6 +33,10 @@ public class Statistics {
         this.level++;
     }
 
+    public void receiveDamage(int ad){
+        actHealth = actHealth - (ad*(100 /(100+armor)));
+    }
+
     public int getAttack() {
         return attack;
     }

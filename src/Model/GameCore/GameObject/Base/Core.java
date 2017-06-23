@@ -1,5 +1,7 @@
 package Model.GameCore.GameObject.Base;
 
+import Model.GameCore.GameObject.Statistics;
+
 import java.awt.*;
 
 /**
@@ -7,4 +9,7 @@ import java.awt.*;
  */
 public class Core extends GeneralBase {
 
+    public Core(Statistics statistics) {
+        super(statistics);
+    }
 }

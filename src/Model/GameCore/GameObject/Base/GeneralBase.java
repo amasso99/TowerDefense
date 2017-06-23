@@ -1,5 +1,6 @@
 package Model.GameCore.GameObject.Base;
 
+import Model.Constants;
 import Model.GameCore.GameObject.GeneralGameObject;
 import Model.GameCore.GameObject.Statistics;
 
@@ -10,14 +11,14 @@ import java.awt.*;
  */
 public class GeneralBase extends GeneralGameObject{
 
-    private Statistics stats;
 
-    public GeneralBase(){
+    public GeneralBase(Statistics statistics){
+        super(statistics);
 
     }
 
     @Override
     public void draw(Graphics2D g2d, int rowX, int rowY) {
-        g2d.fillRect(rowX,rowY,50,50);
+        g2d.fillRect(rowX,rowY, Constants.TOWER_IMG_WIDTH,Constants.TOWER_IMG_HEIGHT);
     }
 }
