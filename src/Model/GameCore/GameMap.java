@@ -6,6 +6,7 @@ import Model.DataStructure.Extended.Utils;
 import Model.DataStructure.Extended.Vertex;
 import Model.DataStructure.List;
 import Model.GameCore.GameObject.Base.GeneralBase;
+import Model.Constants;
 import View.Abstraction.ICanvas;
 import View.Abstraction.IDrawableObject;
 
@@ -21,7 +22,6 @@ public class GameMap implements IDrawableObject{
     private int x;
     private int y;
 
-    private final int MAX_ROW = 10;
 
     private Rectangle rectangle;
 
@@ -47,7 +47,7 @@ public class GameMap implements IDrawableObject{
         for (bases.toFirst();bases.hasAccess();bases.next()){
             map.addVertex(new Vertex<>(bases.getContent()));
         }
-        alllign.insert(bases);
+        alllign.append(bases);
     }
 
     public void addLane(GeneralBase home, GeneralBase target){
@@ -59,15 +59,18 @@ public class GameMap implements IDrawableObject{
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
         g2d.draw(rectangle);
-        int offSetX = x + width/MAX_ROW;
+        int gapX = (int) (width/ ((double) Utils.altSize(alllign)+1));
+        int offSetX = x + gapX;
         for (alllign.toFirst();alllign.hasAccess();alllign.next()){
             List<GeneralBase> list = alllign.getContent();
-            int offSetY =height/ Utils.altSize(list);
+            int gapY = (int) (height/ ((double) Utils.altSize(list)+1));
+
+            int offSetY = y;
             for (list.toFirst();list.hasAccess();list.next()){
-                list.getContent().draw(g2d,offSetX-25, offSetY-25);
-                offSetY = offSetY +  height/Utils.altSize(list);
+                offSetY = offSetY +  gapY;
+                list.getContent().draw(g2d,offSetX- Constants.TOWER_IMG_WIDTH /2, offSetY- Constants.TOWER_IMG_HEIGHT /2);
             }
-            offSetX = offSetX + width/MAX_ROW;
+            offSetX = offSetX + gapX;
         }
 
         
