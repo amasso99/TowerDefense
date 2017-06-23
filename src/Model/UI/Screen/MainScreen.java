@@ -3,11 +3,8 @@ package Model.UI.Screen;
 import Control.ScreenController;
 import Model.UI.ActionEvent;
 import Model.UI.Button;
-import Model.UI.Label;
 import View.Panel.DrawingPanel;
 import java.awt.Font;
-
-import java.awt.*;
 
 /**
  * Created by Oussama on 02.06.2017.
@@ -32,6 +29,10 @@ public class MainScreen extends DrawingPanel implements ActionEvent {
         btnStart.setActionListener(this);
         addObject(btnStart);
 
+        Button btnSettings = new Button("Settings", (int) (screenWidth*0.5-btnWidth/2), (int) (screenHeight*0.4), btnWidth, btnHeight, "settings", f);
+        btnSettings.setActionListener(this);
+        addObject(btnSettings);
+
         Button btnExit = new Button("Exit", (int) (screenWidth*0.5-btnWidth/2), (int) (screenHeight*0.6),btnWidth,btnHeight,"exit",f);
         btnExit.setActionListener(this);
         addObject(btnExit);
@@ -42,6 +43,9 @@ public class MainScreen extends DrawingPanel implements ActionEvent {
         switch(id){
             case("start"):
                 screenController.switchScreen(ScreenController.Type.GAME_SCREEN);
+                break;
+            case("settings"):
+                screenController.switchScreen(ScreenController.Type.SETTING_SCREEN);
                 break;
             case("exit"):
                 System.exit(0);

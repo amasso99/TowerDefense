@@ -6,7 +6,7 @@ import Model.GameCore.GameObject.Statistics;
 import java.awt.*;
 
 /**
- * Created by 204g07 on 09.06.2017.
+ * Created by Alex on 09.06.2017.
  */
 public class Barracks extends GeneralBase {
 

@@ -53,7 +53,7 @@ public class Button implements IInteractableObject {
         if(img == null){
             FontMetrics metrics = g2d.getFontMetrics(font);
             int fontHeight = metrics.getHeight();
-            int fontWidth = metrics.stringWidth(text);
+            int fontWidth = metrics.stringWidth(text)/2;
 
             g2d.setFont(font);
 

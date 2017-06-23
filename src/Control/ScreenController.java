@@ -2,6 +2,7 @@ package Control;
 
 import Model.UI.Screen.GameScreen;
 import Model.UI.Screen.MainScreen;
+import Model.UI.Screen.SettingScreen;
 import View.MainFrame;
 
 /**
@@ -10,6 +11,7 @@ import View.MainFrame;
 public class ScreenController {
     public enum Type{
         MAIN_SCREEN(),
+        SETTING_SCREEN(),
         GAME_SCREEN();
     }
 
@@ -17,6 +19,7 @@ public class ScreenController {
     private MainFrame frame;
 
     private MainScreen mainScreen;
+    private SettingScreen settingScreen;
     private GameScreen gameScreen;
 
     public ScreenController(MainController mainController){
@@ -30,6 +33,7 @@ public class ScreenController {
     private void createScreen() {
         mainScreen = new MainScreen(this);
         gameScreen = new GameScreen(this);
+        settingScreen = new SettingScreen(this);
     }
 
     public void switchScreen(Type type){
@@ -37,11 +41,12 @@ public class ScreenController {
             case MAIN_SCREEN:
                 frame.setContentPanel(mainScreen);
                 break;
+            case SETTING_SCREEN:
+                frame.setContentPanel(settingScreen);
+                break;
             case GAME_SCREEN:
                 frame.setContentPanel(gameScreen);
                 break;
         }
-
     }
-
 }
