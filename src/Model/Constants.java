@@ -7,4 +7,6 @@ public class Constants {
     public static final int TOWER_IMG_WIDTH = 20;
     public static final int TOWER_IMG_HEIGHT = 20;
 
+    public static final int MOVING_TIME = 5;
+
 }

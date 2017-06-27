@@ -25,6 +25,14 @@ public final class Utils {
         return map(list, x -> x);
     }
 
+    public static <T> List<T> altCloneList(List<T> list) {
+        List<T> out = new List<T>();
+        for (list.toFirst();list.hasAccess();list.next()){
+            out.append(list.getContent());
+        }
+        return out;
+    }
+
     public static <T> T[] toArray(List<T> list, Class<T> clz) {
         return mapToArray(list, x -> x, clz);
     }

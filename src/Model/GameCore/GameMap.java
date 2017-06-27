@@ -29,6 +29,7 @@ public class GameMap implements IDrawableObject{
     private ICanvas canvas;
 
     private List<List<GeneralBase>> alllign;
+    private List<Edge<GeneralBase,Lane>>lanes;
 
     public GameMap(double width, double height, double x, double y){
         this.width = (int) width;
@@ -39,6 +40,7 @@ public class GameMap implements IDrawableObject{
         map = new Graph<GeneralBase,Lane>();
 
         alllign = new List<>();
+        lanes = new List<>();
 
         rectangle = new Rectangle(this.x,this.y,this.width,this.height);
     }
@@ -50,8 +52,10 @@ public class GameMap implements IDrawableObject{
         alllign.append(bases);
     }
 
-    public void addLane(GeneralBase home, GeneralBase target){
-        map.addEdge(new Edge(map.getVertex(home),map.getVertex(target),new Lane()));
+    public void addLane(GeneralBase home, GeneralBase target,int length){
+        Edge<GeneralBase,Lane> edge  = new Edge(map.getVertex(home),map.getVertex(target),new Lane(length));
+        map.addEdge(edge);
+        lanes.append(edge);
 
     }
 
@@ -64,7 +68,6 @@ public class GameMap implements IDrawableObject{
         for (alllign.toFirst();alllign.hasAccess();alllign.next()){
             List<GeneralBase> list = alllign.getContent();
             int gapY = (int) (height/ ((double) Utils.altSize(list)+1));
-
             int offSetY = y;
             for (list.toFirst();list.hasAccess();list.next()){
                 offSetY = offSetY +  gapY;
@@ -73,6 +76,17 @@ public class GameMap implements IDrawableObject{
             offSetX = offSetX + gapX;
         }
 
+        List<Edge<GeneralBase,Lane>> list = lanes;
+        System.out.println(Utils.altSize(list));
+        for (list.toFirst();list.hasAccess();list.next()){
+            Edge<GeneralBase,Lane> edge = list.getContent();
+            if(edge != null) {
+                GeneralBase start = edge.getStart().getContent();
+                GeneralBase end = edge.getEnd().getContent();
+                System.out.println(start.getX() + "    " + start.getY());
+                g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+            }
+        }
         
     }
 

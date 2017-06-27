@@ -12,9 +12,12 @@ import java.awt.*;
  */
 public class GeneralBase extends GeneralGameObject{
 
+    private int x,y;
 
     public GeneralBase(Statistics statistics){
         super(statistics);
+        x = 0;
+        y = 0;
 
     }
 
@@ -25,5 +28,17 @@ public class GeneralBase extends GeneralGameObject{
     @Override
     public void draw(Graphics2D g2d, int rowX, int rowY) {
         g2d.fillRect(rowX,rowY, Constants.TOWER_IMG_WIDTH,Constants.TOWER_IMG_HEIGHT);
+        if(x == 0 || y == 0){
+            x = rowX +Constants.TOWER_IMG_WIDTH / 2;
+            y = rowY +Constants.TOWER_IMG_HEIGHT / 2;
+        }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

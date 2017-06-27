@@ -49,7 +49,7 @@ public class Graph<T, R extends Comparable<R>> {
      * Nachdem die Ergebnisliste fertiggestellt wurde, wird ihr erstes Element das aktuelle Element innerhalb dieser Liste.
      */
     public List<Edge<T, R>> getEdges() {
-        return Utils.cloneList(edges);
+        return Utils.altCloneList(edges);
     }
 
     /**
