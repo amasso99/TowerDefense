@@ -59,7 +59,6 @@ public class GameMap implements IDrawableObject{
             Edge<GeneralBase, Lane> edge = new Edge(map.getVertex(home), map.getVertex(target), new Lane(length));
             map.addEdge(edge);
             lanes.append(edge);
-            System.out.println("IT WORK");
         }
 
     }
@@ -90,7 +89,6 @@ public class GameMap implements IDrawableObject{
                 if(startVertex != null && endVertex != null) {
                     GeneralBase start = startVertex.getContent();
                     GeneralBase end = endVertex.getContent();
-                    System.out.println(start.getX() + "    " + start.getY());
                     g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
                 }
             }
