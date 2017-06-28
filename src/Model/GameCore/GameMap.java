@@ -77,14 +77,17 @@ public class GameMap implements IDrawableObject{
         }
 
         List<Edge<GeneralBase,Lane>> list = lanes;
-        System.out.println(Utils.altSize(list));
         for (list.toFirst();list.hasAccess();list.next()){
             Edge<GeneralBase,Lane> edge = list.getContent();
             if(edge != null) {
-                GeneralBase start = edge.getStart().getContent();
-                GeneralBase end = edge.getEnd().getContent();
-                System.out.println(start.getX() + "    " + start.getY());
-                g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+                Vertex<GeneralBase> startVertex = edge.getStart();
+                Vertex<GeneralBase> endVertex = edge.getEnd();
+                if(startVertex != null && endVertex != null) {
+                    GeneralBase start = startVertex.getContent();
+                    GeneralBase end = endVertex.getContent();
+                    System.out.println(start.getX() + "    " + start.getY());
+                    g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+                }
             }
         }
         

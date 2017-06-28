@@ -17,12 +17,16 @@ public class GameScreen extends DrawingPanel {
     public GameScreen(ScreenController screenController){
         this.screenController = screenController;
         initAndAddObject();
+        buildMap();
     }
 
     private void initAndAddObject() {
         gameMap = new GameMap(screenWidth*0.95,screenHeight*0.75,0.025*screenWidth,0.05*screenHeight);
         addObject(gameMap);
 
+    }
+
+    private void buildMap(){
         List<GeneralBase> base = new List<>();
         base.toFirst();
         base.append(new GeneralBase());
@@ -36,9 +40,6 @@ public class GameScreen extends DrawingPanel {
         base2.next();
         gameMap.addLane(base.getContent(),base2.getContent(),6);
         gameMap.addBaseRow(base2);
-
-
-
 
         List<GeneralBase> base3 = new List<>();
         base3.append(new GeneralBase());
@@ -60,8 +61,6 @@ public class GameScreen extends DrawingPanel {
         gameMap.addLane(base4.getContent(),base3.getContent(),6);
         base3.next();
         gameMap.addLane(base4.getContent(),base3.getContent(),6);
-
-
 
     }
 }
