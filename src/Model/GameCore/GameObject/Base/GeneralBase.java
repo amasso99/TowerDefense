@@ -27,7 +27,8 @@ public class GeneralBase extends GeneralGameObject{
 
     @Override
     public void draw(Graphics2D g2d, int rowX, int rowY) {
-        g2d.fillRect(rowX,rowY, Constants.TOWER_IMG_WIDTH,Constants.TOWER_IMG_HEIGHT);
+        g2d.setColor(new Color(255, 131, 237));
+
         if(x == 0 || y == 0){
             x = rowX +Constants.TOWER_IMG_WIDTH / 2;
             y = rowY +Constants.TOWER_IMG_HEIGHT / 2;
