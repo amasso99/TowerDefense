@@ -53,9 +53,14 @@ public class GameMap implements IDrawableObject{
     }
 
     public void addLane(GeneralBase home, GeneralBase target,int length){
-        Edge<GeneralBase,Lane> edge  = new Edge(map.getVertex(home),map.getVertex(target),new Lane(length));
-        map.addEdge(edge);
-        lanes.append(edge);
+        Vertex start = map.getVertex(home);
+        Vertex end = map.getVertex(target);
+        if(start != null && end != null) {
+            Edge<GeneralBase, Lane> edge = new Edge(map.getVertex(home), map.getVertex(target), new Lane(length));
+            map.addEdge(edge);
+            lanes.append(edge);
+            System.out.println("IT WORK");
+        }
 
     }
 
