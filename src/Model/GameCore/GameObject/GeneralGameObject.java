@@ -12,7 +12,7 @@ public abstract class GeneralGameObject {
         this.statistics = statistics;
     }
 
-    public Statistics getStatistics() {
+    public Statistics getStats() {
         return statistics;
     }
 
