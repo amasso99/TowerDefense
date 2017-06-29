@@ -26,7 +26,7 @@ public class GameMap implements IDrawableObject{
 
     private Rectangle rectangle;
 
-    private Graph map;
+    private Graph<GeneralBase,Lane> map;
     private ICanvas canvas;
     private Color color = new Color(0,0,0);
 
@@ -39,7 +39,7 @@ public class GameMap implements IDrawableObject{
         this.x = (int) x;
         this.y = (int) y;
 
-        map = new Graph<GeneralBase,Lane>();
+        map = new Graph<>();
 
         alllign = new List<>();
         rectangle = new Rectangle(this.x,this.y,this.width,this.height);
@@ -47,28 +47,34 @@ public class GameMap implements IDrawableObject{
 
     public void summonUnit(UnitType type){
         Unit unit = new Unit(type);
+
         joinRandomLane(start,unit);
     }
 
     public void joinRandomLane(Vertex vertex,Unit unit){
-        List list = map.getEdges(vertex);
-        int size = Utils.altSize(list);
-        size = (int)(Math.random()*size);
+        List<Edge> list = map.getEdges(vertex);
+        if(!list.isEmpty()) {
+            int size = Utils.altSize(list);
+            size = (int) (Math.random() * size);
 
-        list.toFirst();
-        for (int i = 0; i < size; i++) {
-            list.next();
-        }
-        if(!list.hasAccess()){
             list.toFirst();
-        }
-        Edge<GeneralBase,Lane> edge = (Edge<GeneralBase, Lane>) list.getContent();
-        if(edge != null) {
-            edge.getWeight().join(unit);
+            for (int i = 0; i < size; i++) {
+                list.next();
+            }
+            if (!list.hasAccess()) {
+                list.toFirst();
+            }
+            list.toFirst();
+            System.out.println(Utils.altSize(list));
+            Edge<GeneralBase, Lane> edge = list.getContent();
+            if (edge != null) {
+                edge.getWeight().join(unit);
+            }
         }
     }
 
     public void setStartBase(GeneralBase base){
+
         this.start = map.getVertex(base);
     }
 
@@ -78,6 +84,9 @@ public class GameMap implements IDrawableObject{
 
     public void addBaseRow(List<GeneralBase> bases){
         for (bases.toFirst();bases.hasAccess();bases.next()){
+            if(start == null){
+                start = new Vertex<>(bases.getContent());
+            }
             map.addVertex(new Vertex<>(bases.getContent()));
         }
         alllign.append(bases);
