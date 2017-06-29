@@ -66,6 +66,7 @@ public class GameMap implements IDrawableObject{
     @Override
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
+        g2d.setColor(new Color(0,0,0));
         g2d.fill(rectangle);
         int gapX = (int) (width/ ((double) Utils.altSize(alllign)+1));
         int offSetX = x + gapX;
