@@ -2,6 +2,7 @@ package Model.UI.Screen;
 
 import Control.ScreenController;
 import Model.UI.ActionEvent;
+import Model.UI.Popup;
 import View.Panel.DrawingPanel;
 import Model.UI.Button;
 import java.awt.Font;
@@ -28,6 +29,9 @@ public class SettingScreen extends DrawingPanel implements ActionEvent{
         Button btnBack = new Button("Back", (int) (screenWidth*0.5-btnWidth/2), (int) (screenHeight*0.7), btnWidth, btnHeight, "back", f);
         btnBack.setActionListener(this);
         addObject(btnBack);
+
+        //Popup pop = new Popup(100,100,"+100€",f, 0,255,0);
+        //addObject(pop);
     }
 
     @Override
