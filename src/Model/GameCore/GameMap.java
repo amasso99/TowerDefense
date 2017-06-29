@@ -82,6 +82,7 @@ public class GameMap implements IDrawableObject{
         this.end = map.getVertex(base);
     }
 
+
     public void addBaseRow(List<GeneralBase> bases){
         for (bases.toFirst();bases.hasAccess();bases.next()){
             if(start == null){
@@ -92,6 +93,12 @@ public class GameMap implements IDrawableObject{
         alllign.append(bases);
     }
 
+    /**
+     * Adds a lane from home to target with a set length.
+     * @param home base vertex
+     * @param target target vertex
+     * @param length length of the lane
+     */
     public void addLane(GeneralBase home, GeneralBase target,int length){
         Vertex start = map.getVertex(home);
         Vertex end = map.getVertex(target);
@@ -101,6 +108,9 @@ public class GameMap implements IDrawableObject{
         }
     }
 
+    /**
+     * Draws the game map.
+     */
     @Override
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
