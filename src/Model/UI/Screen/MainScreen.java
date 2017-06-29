@@ -3,6 +3,7 @@ package Model.UI.Screen;
 import Control.ScreenController;
 import Model.UI.ActionEvent;
 import Model.UI.Button;
+import Model.UI.Popup;
 import View.Panel.DrawingPanel;
 import java.awt.Font;
 
