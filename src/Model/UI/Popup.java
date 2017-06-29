@@ -37,6 +37,10 @@ public class Popup implements IDrawableObject {
         this.a = 255;
         //color = new Color(0,0,0);
     }
+
+    /**
+     * Draws the popup and lets it fade away.
+     */
     @Override
     public void draw() {
         Graphics2D g2d = canvas.getPencil();

@@ -33,70 +33,138 @@ public class Statistics {
         }
     }
 
+    /**
+     * Sets currentHealth minus the received damage.
+     * @param ad Received damage
+     */
     public void receiveDamage(int ad){
         currentHealth = (int) (currentHealth - (ad*(100 /(100+armor))));
     }
 
+    /**
+     * Gets attack style.
+     * @return Attack style
+     */
     public int getAttack() {
         return attack;
     }
 
+    /**
+     * Sets attack style.
+     * @param attack Attack style
+     */
     public void setAttack(int attack) {
         this.attack = attack;
     }
 
+    /**
+     * Gets health.
+     * @return Health.
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Sets health.
+     * @param health Health to be set.
+     */
     public void setHealth(int health) {
         this.health = health;
     }
 
+    /**
+     * Gets attack speed.
+     * @return Attack speed
+     */
     public int getAttackSpeed() {
         return attackSpeed;
     }
 
+    /**
+     * Sets attack speed
+     * @param attackSpeed Attack speed to be set
+     */
     public void setAttackSpeed(int attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
 
+    /**
+     * Gets speed.
+     * @return Speed
+     */
     public double getSpeed() {
         return speed;
     }
 
+    /**
+     * Sets speed.
+     * @param speed Speed to be set.
+     */
     public void setSpeed(double speed) {
         this.speed = speed;
     }
 
+    /**
+     * Gets current health.
+     * @return Current health.
+     */
     public int getCurrentHealth() {
         return currentHealth;
     }
 
+    /**
+     * Sets health
+     * @param currentHealth Health amount to be set
+     */
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
     }
 
+    /**
+     * Gets armor value.
+     * @return Armor value
+     */
     public double getArmor() {
         return armor;
     }
 
+    /**
+     * Sets armor value.
+     * @param armor Armor value to be set
+     */
     public void setArmor(double armor) {
         this.armor = armor;
     }
 
+    /**
+     * Gets level.
+     * @return Current level
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     * Sets level.
+     * @param level Level to be set
+     */
     public void setLevel(int level) {
         this.level = level;
     }
 
+    /**
+     * Gets mana.
+     * @return current mana
+     */
     public int getMana() {
         return mana;
     }
 
+    /**
+     * Sets mana.
+     * @param mana Mana to be set
+     */
     public void setMana(int mana) {
         this.mana = mana;
     }

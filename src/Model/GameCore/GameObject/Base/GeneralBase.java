@@ -25,6 +25,7 @@ public class GeneralBase extends GeneralGameObject{
         super(UnitType.ARCHER.getStats());
     }
 
+
     @Override
     public void draw(Graphics2D g2d, int rowX, int rowY) {
         g2d.setColor(new Color(255, 131, 237));

@@ -46,6 +46,9 @@ public class Button implements IInteractableObject {
         this.event = listener;
     }
 
+    /**
+     * Draws the text and box around the box.
+     */
     @Override
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
@@ -102,6 +105,10 @@ public class Button implements IInteractableObject {
 
     }
 
+    /**
+     * Checks if buttons were clicked.
+     * @param e Received mouse event
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         PointerInfo info = MouseInfo.getPointerInfo();
