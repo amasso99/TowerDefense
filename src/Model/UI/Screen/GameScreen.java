@@ -24,12 +24,16 @@ public class GameScreen extends DrawingPanel {
         gameMap = new GameMap(screenWidth*0.95,screenHeight*0.75,0.025*screenWidth,0.05*screenHeight);
         addObject(gameMap);
 
+        //gameMap.summonUnit(UnitType.ARCHER);
+
     }
 
     private void buildMap(){
         List<GeneralBase> base = new List<>();
         base.append(new GeneralBase());
+        base.toFirst();
         gameMap.addBaseRow(base);
+        gameMap.setStartBase(base.getContent());
 
         List<GeneralBase> base2 = new List<>();
         base2.append(new GeneralBase());

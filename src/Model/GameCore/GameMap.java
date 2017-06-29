@@ -1,12 +1,14 @@
 package Model.GameCore;
 
+import Model.Constants;
 import Model.DataStructure.Extended.Edge;
 import Model.DataStructure.Extended.Graph;
 import Model.DataStructure.Extended.Utils;
 import Model.DataStructure.Extended.Vertex;
 import Model.DataStructure.List;
 import Model.GameCore.GameObject.Base.GeneralBase;
-import Model.Constants;
+import Model.GameCore.GameObject.Unit;
+import Model.GameCore.GameObject.UnitType;
 import View.Abstraction.ICanvas;
 import View.Abstraction.IDrawableObject;
 
@@ -22,14 +24,14 @@ public class GameMap implements IDrawableObject{
     private int x;
     private int y;
 
-
     private Rectangle rectangle;
 
     private Graph map;
     private ICanvas canvas;
+    private Color color = new Color(0,0,0);
 
     private List<List<GeneralBase>> alllign;
-    private List<Edge<GeneralBase,Lane>>lanes;
+    private Vertex<GeneralBase> start,end;
 
     public GameMap(double width, double height, double x, double y){
         this.width = (int) width;
@@ -40,9 +42,38 @@ public class GameMap implements IDrawableObject{
         map = new Graph<GeneralBase,Lane>();
 
         alllign = new List<>();
-        lanes = new List<>();
-
         rectangle = new Rectangle(this.x,this.y,this.width,this.height);
+    }
+
+    public void summonUnit(UnitType type){
+        Unit unit = new Unit(type);
+        joinRandomLane(start,unit);
+    }
+
+    public void joinRandomLane(Vertex vertex,Unit unit){
+        List list = map.getEdges(vertex);
+        int size = Utils.altSize(list);
+        size = (int)(Math.random()*size);
+
+        list.toFirst();
+        for (int i = 0; i < size; i++) {
+            list.next();
+        }
+        if(!list.hasAccess()){
+            list.toFirst();
+        }
+        Edge<GeneralBase,Lane> edge = (Edge<GeneralBase, Lane>) list.getContent();
+        if(edge != null) {
+            edge.getWeight().join(unit);
+        }
+    }
+
+    public void setStartBase(GeneralBase base){
+        this.start = map.getVertex(base);
+    }
+
+    public void setEndBase(GeneralBase base){
+        this.end = map.getVertex(base);
     }
 
     public void addBaseRow(List<GeneralBase> bases){
@@ -58,16 +89,14 @@ public class GameMap implements IDrawableObject{
         if(start != null && end != null) {
             Edge<GeneralBase, Lane> edge = new Edge(map.getVertex(home), map.getVertex(target), new Lane(length));
             map.addEdge(edge);
-            lanes.append(edge);
         }
-
     }
 
     @Override
     public void draw() {
         Graphics2D g2d = canvas.getPencil();
-        g2d.setColor(new Color(0,0,0));
-        g2d.fill(rectangle);
+        g2d.setColor(color);
+        g2d.draw(rectangle);
         int gapX = (int) (width/ ((double) Utils.altSize(alllign)+1));
         int offSetX = x + gapX;
         for (alllign.toFirst();alllign.hasAccess();alllign.next()){
@@ -81,7 +110,7 @@ public class GameMap implements IDrawableObject{
             offSetX = offSetX + gapX;
         }
 
-        List<Edge<GeneralBase,Lane>> list = lanes;
+        List<Edge<GeneralBase,Lane>> list = map.getEdges();
         for (list.toFirst();list.hasAccess();list.next()){
             Edge<GeneralBase,Lane> edge = list.getContent();
             if(edge != null) {
@@ -99,6 +128,13 @@ public class GameMap implements IDrawableObject{
 
     @Override
     public void update(double dt) {
+        List<Edge<GeneralBase,Lane>> list = map.getEdges();
+        for (list.toFirst();list.hasAccess();list.next()){
+            Edge<GeneralBase,Lane> edge = list.getContent();
+            if(edge != null) {
+                edge.getWeight().update(dt);
+            }
+        }
 
     }
 

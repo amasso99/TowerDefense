@@ -10,7 +10,7 @@ import static Model.Constants.MOVING_TIME;
  */
 public class Lane implements Comparable<Lane> {
 
-    private float timer;
+    private double timer;
     private final int wayLength;
     private Queue<Unit>queue;
     private boolean attackable;
@@ -26,12 +26,16 @@ public class Lane implements Comparable<Lane> {
         queue.enqueue(unit);
     }
 
-    public void update(float dt){
-        timer =  dt + timer;
-        if(timer >= MOVING_TIME*(queue.front().getStatistics().getSpeed())){
-            attackable = true;
-            timer = 0;
+    public void update(double dt){
+        if(!queue.isEmpty()) {
+            timer = dt + timer;
+            if (timer >= MOVING_TIME * (queue.front().getStats().getSpeed())) {
+                attackable = true;
+                timer = 0;
+                System.exit(0);
+            }
         }
+        timer = 0;
     }
 
     @Override
