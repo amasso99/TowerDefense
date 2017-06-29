@@ -52,7 +52,7 @@ public class Popup implements IDrawableObject {
 
     @Override
     public void update(double dt) {
-        System.out.println(a);
+        //System.out.println(a);
     }
 
     @Override
