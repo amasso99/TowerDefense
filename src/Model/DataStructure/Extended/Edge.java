@@ -19,22 +19,28 @@ import java.util.Objects;
  * @author Qualitaets- und UnterstuetzungsAgentur - Landesinstitut fuer Schule
  * @version Oktober 2015
  */
-public class Edge<T, R extends Comparable<R>> {
+public class Edge<T, R> {
     private Vertex<T> start;
     private Vertex<T> end;
     private R weight;
     private boolean marked;
+    private boolean oneWay;
 
     /**
      * Ein neues Objekt vom Typ Edge wird erstellt. Die von diesem Objekt
      * repraesentierte Kante verbindet die Knoten pVertex und pAnotherVertex mit der
      * Gewichtung pWeight. Ihre Markierung hat den Wert false.
      */
-    public Edge(Vertex<T> pVertex, Vertex<T> pAnotherVertex, R pWeight) {
+    public Edge(Vertex<T> pVertex, Vertex<T> pAnotherVertex, R pWeight, boolean oneWay) {
         start = pVertex;
         end = pAnotherVertex;
         weight = pWeight;
         marked = false;
+        this.oneWay = oneWay;
+    }
+
+    public Edge(Vertex<T> pVertex, Vertex<T> pAnotherVertex, R pWeight) {
+        this(pVertex, pAnotherVertex, pWeight, false);
     }
 
     public Vertex<T> getStart() {
@@ -73,9 +79,13 @@ public class Edge<T, R extends Comparable<R>> {
         marked = pMark;
     }
 
+    public boolean isOneWay() {
+        return oneWay;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(getStart(), getEnd(), getWeight(), isMarked());
+        return Objects.hash(getStart(), getEnd(), getWeight(), isOneWay());
     }
 
     @Override
@@ -83,6 +93,11 @@ public class Edge<T, R extends Comparable<R>> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Edge<?, ?> edge = (Edge<?, ?>) o;
-        return isMarked() == edge.isMarked() && Objects.equals(getStart(), edge.getStart()) && Objects.equals(getEnd(), edge.getEnd()) && Objects.equals(getWeight(), edge.getWeight());
+        return isOneWay() == edge.isOneWay() && Objects.equals(getStart(), edge.getStart()) && Objects.equals(getEnd(), edge.getEnd()) && Objects.equals(getWeight(), edge.getWeight());
+    }
+
+    @Override
+    public String toString() {
+        return "Edge{" + "start=" + start + ", end=" + end + ", weight=" + weight + ", oneWay=" + oneWay + '}';
     }
 }

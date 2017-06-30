@@ -35,6 +35,7 @@ public class Statistics {
 
     public void receiveDamage(int ad){
         currentHealth = (int) (currentHealth - (ad*(100 /(100+armor))));
+        System.out.println("Ouch! : "+currentHealth+"/"+health);
     }
 
     public int getAttack() {

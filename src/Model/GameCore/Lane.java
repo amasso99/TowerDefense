@@ -29,13 +29,12 @@ public class Lane implements Comparable<Lane> {
     public void update(double dt){
         if(!queue.isEmpty()) {
             timer = dt + timer;
+            System.out.println(timer);
             if (timer >= MOVING_TIME * (queue.front().getStats().getSpeed())) {
                 attackable = true;
                 timer = 0;
-                System.exit(0);
             }
         }
-        timer = 0;
     }
 
     @Override

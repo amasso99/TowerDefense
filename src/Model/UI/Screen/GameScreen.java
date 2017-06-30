@@ -25,7 +25,6 @@ public class GameScreen extends DrawingPanel {
     private void initAndAddObject() {
         gameMap = new GameMap(screenWidth*0.95,screenHeight*0.75,0.025*screenWidth,0.05*screenHeight);
         addObject(gameMap);
-
     }
 
     private void buildMap(){

@@ -65,11 +65,8 @@ public class GameMap implements IDrawableObject{
                 list.toFirst();
             }
             list.toFirst();
-            System.out.println(Utils.altSize(list));
             Edge<GeneralBase, Lane> edge = list.getContent();
-            if (edge != null) {
-                edge.getWeight().join(unit);
-            }
+            edge.getWeight().join(unit);
         }
     }
 
@@ -141,9 +138,16 @@ public class GameMap implements IDrawableObject{
         for (list.toFirst();list.hasAccess();list.next()){
             Edge<GeneralBase,Lane> edge = list.getContent();
             if(edge != null) {
-                edge.getWeight().update(dt);
+                Lane lane = edge.getWeight();
+                lane.update(dt);
+                Unit unit = lane.getAttackableUnit();
+                if(unit != null){
+                    edge.getEnd().getContent().getStats().receiveDamage(unit.getStats().getAttack());
+                }
             }
         }
+
+
 
     }
 

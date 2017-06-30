@@ -22,7 +22,7 @@ import Model.DataStructure.List;
  * @author Qualitaets- und UnterstuetzungsAgentur - Landesinstitut fuer Schule
  * @version Oktober 2015
  */
-public class Graph<T, R extends Comparable<R>> {
+public class Graph<T, R> {
     private List<Vertex<T>> vertices;
     private List<Edge<T, R>> edges;
 
@@ -49,7 +49,7 @@ public class Graph<T, R extends Comparable<R>> {
      * Nachdem die Ergebnisliste fertiggestellt wurde, wird ihr erstes Element das aktuelle Element innerhalb dieser Liste.
      */
     public List<Edge<T, R>> getEdges() {
-        return Utils.altCloneList(edges);
+        return Utils.cloneList(edges);
     }
 
     /**
@@ -81,9 +81,13 @@ public class Graph<T, R extends Comparable<R>> {
                 Vertex<T> start = edge.getStart();
                 Vertex<T> end = edge.getEnd();
 
-                if (getVertex(start.getContent()) == start && getVertex(end.getContent()) == end && getEdge(start, end) == null && start != end) {
-                    //Kante einfuegen.
-                    edges.append(edge);
+                if (getVertex(start.getContent()).equals(start) && getVertex(end.getContent()).equals(end) && !start.equals(end)) {
+                    Edge<T, R> existing = getEdge(start, end);
+
+                    if (existing == null || edge.isOneWay() && existing.isOneWay() && existing.getStart().equals(end)) {
+                        //Kante einfuegen.
+                        edges.append(edge);
+                    }
                 }
             }
         }
@@ -93,12 +97,12 @@ public class Graph<T, R extends Comparable<R>> {
      * Der Auftrag entfernt den Knoten pVertex aus dem Graphen und loescht alle Kanten, die mit ihm inzident sind.
      * Ist der Knoten pVertex nicht im Graphen enthalten, passiert nichts.
      */
-    public void removeVertex(Vertex<T> pVertex) {
+    public synchronized void removeVertex(Vertex<T> pVertex) {
         //Inzidente Kanten entfernen.
         edges.toFirst();
         while (edges.hasAccess()) {
             Edge<T, R> edge = edges.getContent();
-            if (edge.getStart() == pVertex || edge.getEnd() == pVertex) {
+            if (edge.getStart().equals(pVertex) || edge.getEnd().equals(pVertex)) {
                 edges.remove();
             } else {
                 edges.next();
@@ -123,7 +127,7 @@ public class Graph<T, R extends Comparable<R>> {
         //Kante aus Kantenliste des Graphen entfernen.
         edges.toFirst();
         while (edges.hasAccess()) {
-            if (edges.getContent() == pEdge) {
+            if (edges.getContent().equals(pEdge)) {
                 edges.remove();
             } else {
                 edges.next();
@@ -188,16 +192,16 @@ public class Graph<T, R extends Comparable<R>> {
      * pVertex keine Nachbarn in diesem Graphen oder ist gar nicht in diesem Graphen enthalten, so
      * wird eine leere Liste zurueckgeliefert.
      */
-    public List<Vertex<T>> getNeighbours(Vertex<T> pVertex) {
+    public synchronized List<Vertex<T>> getNeighbours(Vertex<T> pVertex) {
         List<Vertex<T>> result = new List<>();
 
         //Alle Kanten durchlaufen.
         for (edges.toFirst(); edges.hasAccess(); edges.next()) {
             Edge<T, R> edge = edges.getContent();
             //Wenn ein Knoten der Kante pVertex ist, den anderen als Nachbarn in die Ergebnisliste einfuegen.
-            if (edge.getStart() == pVertex) {
+            if (edge.getStart().equals(pVertex)) {
                 result.append(edge.getEnd());
-            } else if (edge.getEnd() == pVertex) {
+            } else if (edge.getEnd().equals(pVertex) && !edge.isOneWay()) {
                 result.append(edge.getStart());
             }
         }
@@ -217,7 +221,7 @@ public class Graph<T, R extends Comparable<R>> {
         for (edges.toFirst(); edges.hasAccess(); edges.next()) {
             Edge<T, R> edge = edges.getContent();
             //Wenn ein Knoten der Kante pVertex ist, dann Kante als inzidente Kante in die Ergebnisliste einfuegen.
-            if (edge.getStart() == pVertex || edge.getEnd() == pVertex) {
+            if (edge.getStart().equals(pVertex) || edge.getEnd().equals(pVertex)) {
                 result.append(edges.getContent());
             }
 
@@ -231,13 +235,13 @@ public class Graph<T, R extends Comparable<R>> {
      * im Graphen enthalten oder gibt es keine Kante, die beide Knoten verbindet, so wird null
      * zurueckgeliefert.
      */
-    public Edge<T, R> getEdge(Vertex<T> pVertex, Vertex<T> pAnotherVertex) {
+    public synchronized Edge<T, R> getEdge(Vertex<T> start, Vertex<T> end) {
         //Kanten durchsuchen, solange keine passende gefunden wurde.
         for (edges.toFirst(); edges.hasAccess(); edges.next()) {
             Edge<T, R> edge = edges.getContent();
             //Pruefen, ob die Kante pVertex und pAnotherVertex verbindet.
-            if ((edge.getStart() == pVertex && edge.getEnd() == pAnotherVertex) || (edge.getStart() == pAnotherVertex && edge.getEnd() == pVertex)) {
-                //Kante als Ergebnis merken.
+
+            if (edge.getStart().equals(start) && edge.getEnd().equals(end) || edge.getStart().equals(end) && edge.getEnd().equals(start) && !edge.isOneWay()) {
                 return edges.getContent();
             }
         }
