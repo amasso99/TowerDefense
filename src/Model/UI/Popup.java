@@ -54,6 +54,7 @@ public class Popup implements IDrawableObject {
             a -= speed;
         }else if(a == 0){
             //removeObject
+            canvas.scheduleRemoveObject(this);
         }
         if(a < speed){
             a = 0;

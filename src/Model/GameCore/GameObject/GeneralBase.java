@@ -1,9 +1,6 @@
-package Model.GameCore.GameObject.Base;
+package Model.GameCore.GameObject;
 
 import Model.Constants;
-import Model.GameCore.GameObject.GeneralGameObject;
-import Model.GameCore.GameObject.Statistics;
-import Model.GameCore.GameObject.UnitType;
 
 import java.awt.*;
 
@@ -28,7 +25,7 @@ public class GeneralBase extends GeneralGameObject{
 
     @Override
     public void draw(Graphics2D g2d, int rowX, int rowY) {
-        g2d.setColor(new Color(255, 131, 237));
+        g2d.setColor(new Color(0, 0, 0));
         g2d.fillRect(rowX,rowY,Constants.TOWER_IMG_WIDTH,Constants.TOWER_IMG_HEIGHT);
 
         if(x == 0 || y == 0){

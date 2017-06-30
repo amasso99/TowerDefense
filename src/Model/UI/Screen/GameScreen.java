@@ -3,7 +3,7 @@ package Model.UI.Screen;
 import Control.ScreenController;
 import Model.DataStructure.List;
 import Model.GameCore.GameMap;
-import Model.GameCore.GameObject.Base.GeneralBase;
+import Model.GameCore.GameObject.GeneralBase;
 import Model.GameCore.GameObject.UnitType;
 import View.Panel.DrawingPanel;
 

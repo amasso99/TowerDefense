@@ -6,7 +6,7 @@ import Model.DataStructure.Extended.Graph;
 import Model.DataStructure.Extended.Utils;
 import Model.DataStructure.Extended.Vertex;
 import Model.DataStructure.List;
-import Model.GameCore.GameObject.Base.GeneralBase;
+import Model.GameCore.GameObject.GeneralBase;
 import Model.GameCore.GameObject.Unit;
 import Model.GameCore.GameObject.UnitType;
 import View.Abstraction.ICanvas;
