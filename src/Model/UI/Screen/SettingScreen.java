@@ -33,7 +33,7 @@ public class SettingScreen extends DrawingPanel implements ActionEvent{
         btnBack.setActionListener(this);
         addObject(btnBack);
 
-        Popup pop = new Popup(100,100,"+100$",f, 0,255,0, 4);
+        Popup pop = new Popup(100,100,"+100$",f, 0,255,0, 1);
         addObject(pop);
     }
 
