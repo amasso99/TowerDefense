@@ -22,6 +22,9 @@ public class SettingScreen extends DrawingPanel implements ActionEvent{
         initAndAddObjects();
     }
 
+    /**
+     * Adds the buttons in the settings.
+     */
     public void initAndAddObjects() {
         int btnWidth = (int) (screenWidth*0.7);
         int btnHeight = (int) (screenHeight*0.1);
@@ -34,6 +37,10 @@ public class SettingScreen extends DrawingPanel implements ActionEvent{
         addObject(pop);
     }
 
+    /**
+     * Sets actions for main menu settings.
+     * @param id received action
+     */
     @Override
     public void doAction(String id) {
         switch(id){

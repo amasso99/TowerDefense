@@ -22,10 +22,18 @@ public class Lane implements Comparable<Lane> {
         queue = new Queue<Unit>();
     }
 
+    /**
+     * Lets a unit join a lane.
+     * @param unit Unit to be enqueued.
+     */
     public void join(Unit unit){
         queue.enqueue(unit);
     }
 
+    /**
+     * Updates the attack radius.
+     * @param dt time between frames
+     */
     public void update(double dt){
         if(!queue.isEmpty()) {
             timer = dt + timer;
@@ -51,10 +59,18 @@ public class Lane implements Comparable<Lane> {
         return -1;
     }
 
+    /**
+     * Gets lane length.
+     * @return lane length
+     */
     public int getWayLength(){
         return wayLength;
     }
 
+    /**
+     *
+     * @return
+     */
     public Unit getAttackableUnit(){
         if(attackable){
             attackable = false;

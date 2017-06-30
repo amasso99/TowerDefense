@@ -39,6 +39,10 @@ public class MainScreen extends DrawingPanel implements ActionEvent {
         addObject(btnExit);
     }
 
+    /**
+     * Sets actions for main menu settings.
+     * @param id received action
+     */
     @Override
     public void doAction(String id) {
         switch(id){
