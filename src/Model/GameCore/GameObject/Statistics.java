@@ -4,8 +4,8 @@ package Model.GameCore.GameObject;
  * Created by 204g07 on 02.06.2017.
  */
 public class Statistics {
-    int attack, health, currentHealth, price;
-    double armor,speed,attackSpeed;
+    private int attack, health, currentHealth, price;
+    private double armor,speed,attackSpeed;
 
     public Statistics(int attack, int health, double attackSpeed, double speed, double armor, int cost) {
         this.attack = attack;
@@ -24,6 +24,10 @@ public class Statistics {
     public void receiveDamage(int ad){
         currentHealth = (int) (currentHealth - (ad*(100 /(100+armor))));
         System.out.println("Ouch! : "+currentHealth+"/"+health);
+    }
+
+    public double getHealthInPercent(){
+        return (double)currentHealth/health;
     }
 
     /**

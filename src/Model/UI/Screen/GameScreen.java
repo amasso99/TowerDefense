@@ -5,7 +5,10 @@ import Model.DataStructure.List;
 import Model.GameCore.GameMap;
 import Model.GameCore.GameObject.GeneralBase;
 import Model.GameCore.GameObject.UnitType;
+import Model.UI.Button;
 import View.Panel.DrawingPanel;
+
+import java.awt.*;
 
 /**
  * Created by 204g07 on 12.06.2017.
@@ -19,12 +22,30 @@ public class GameScreen extends DrawingPanel {
         this.screenController = screenController;
         initAndAddObject();
         buildMap();
-        gameMap.summonUnit(UnitType.ARCHER);
     }
 
     private void initAndAddObject() {
         gameMap = new GameMap(screenWidth*0.95,screenHeight*0.75,0.025*screenWidth,0.05*screenHeight);
         addObject(gameMap);
+
+        UnitType[]types = UnitType.values();
+        int offsetY = (int) (screenHeight*0.8);
+        int offsetX = (int) (0.025*screenWidth);
+
+        int width = (int) (screenWidth*0.95);
+        int btnWidth = width/ types.length;
+        int btnHeight = (int) (screenHeight*0.1);
+        Font f = new Font("Arial", Font.PLAIN, 32);
+        for (int i = 0; i < types.length; i++) {
+            Button btn = new Button(types[i].toString(),offsetX,offsetY,btnWidth,btnHeight,types[i].toString(),f);
+            addObject(btn);
+            offsetX = offsetX + btnWidth;
+            if(i == 2){
+                offsetX = (int) (0.025*screenWidth);
+                offsetY = offsetY + btnHeight;
+            }
+        }
+
     }
 
     private void buildMap(){

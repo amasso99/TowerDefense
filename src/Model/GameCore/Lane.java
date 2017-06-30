@@ -1,5 +1,6 @@
 package Model.GameCore;
 
+import Model.DataStructure.List;
 import Model.DataStructure.Queue;
 import Model.GameCore.GameObject.Unit;
 
@@ -56,6 +57,28 @@ public class Lane implements Comparable<Lane> {
             return 0;
         }
         return -1;
+    }
+
+    public Unit getFront(){
+        return queue.front();
+    }
+
+    public List<Unit> getAllUnits(){
+        List<Unit> out = new List<>();
+        Queue<Unit> copy= new Queue<>();
+
+        while(!queue.isEmpty()) {
+            out.append(queue.front());
+            copy.enqueue(queue.front());
+            queue.dequeue();
+        }
+
+        while(!copy.isEmpty()){
+            queue.enqueue(copy.front());
+            copy.dequeue();
+        }
+
+        return out;
     }
 
     /**

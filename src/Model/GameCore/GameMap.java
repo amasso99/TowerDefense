@@ -113,6 +113,18 @@ public class GameMap implements IDrawableObject{
         Graphics2D g2d = canvas.getPencil();
         g2d.setColor(color);
         g2d.draw(rectangle);
+        drawBases(g2d);
+        drawLanes(g2d);
+    }
+
+    private void drawUnits(List<Unit> units, Graphics2D g2d) {
+        for (units.toFirst();units.hasAccess();units.next()){
+
+        }
+
+    }
+
+    private void drawBases(Graphics2D g2d) {
         int gapX = (int) (width/ ((double) Utils.altSize(alllign)+1));
         int offSetX = x + gapX;
         for (alllign.toFirst();alllign.hasAccess();alllign.next()){
@@ -125,7 +137,9 @@ public class GameMap implements IDrawableObject{
             }
             offSetX = offSetX + gapX;
         }
+    }
 
+    private void drawLanes(Graphics2D g2d) {
         List<Edge<GeneralBase,Lane>> list = map.getEdges();
         for (list.toFirst();list.hasAccess();list.next()){
             Edge<GeneralBase,Lane> edge = list.getContent();
@@ -135,11 +149,16 @@ public class GameMap implements IDrawableObject{
                 if(startVertex != null && endVertex != null) {
                     GeneralBase start = startVertex.getContent();
                     GeneralBase end = endVertex.getContent();
+                    g2d.setColor(Color.black);
                     g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+                    if(edge.getWeight().getFront() != null) {
+                        int x = (start.getX() + (end.getX()- start.getX())/2) - Constants.UNIT_IMG_HEIGHT/2;
+                        int y = (start.getY() + (end.getY() - start.getY())/2)- Constants.UNIT_IMG_WIDTH/2;
+                        edge.getWeight().getFront().draw(g2d, x, y);
+                    }
                 }
             }
         }
-        
     }
 
     @Override
@@ -156,9 +175,6 @@ public class GameMap implements IDrawableObject{
                 }
             }
         }
-
-
-
     }
 
     @Override
