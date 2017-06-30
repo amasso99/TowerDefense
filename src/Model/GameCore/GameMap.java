@@ -118,10 +118,6 @@ public class GameMap implements IDrawableObject{
     }
 
     private void drawUnits(List<Unit> units, Graphics2D g2d) {
-        for (units.toFirst();units.hasAccess();units.next()){
-
-        }
-
     }
 
     private void drawBases(Graphics2D g2d) {
@@ -149,12 +145,43 @@ public class GameMap implements IDrawableObject{
                 if(startVertex != null && endVertex != null) {
                     GeneralBase start = startVertex.getContent();
                     GeneralBase end = endVertex.getContent();
+
                     g2d.setColor(Color.black);
                     g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
                     if(edge.getWeight().getFront() != null) {
                         int x = (start.getX() + (end.getX()- start.getX())/2) - Constants.UNIT_IMG_HEIGHT/2;
                         int y = (start.getY() + (end.getY() - start.getY())/2)- Constants.UNIT_IMG_WIDTH/2;
                         edge.getWeight().getFront().draw(g2d, x, y);
+                    }
+                }
+            }
+        }
+    }
+
+    private void altDrawLane(Graphics2D g2d){
+        List<Edge<GeneralBase,Lane>> list = map.getEdges();
+        for (list.toFirst();list.hasAccess();list.next()){
+            Edge<GeneralBase,Lane> edge = list.getContent();
+            if(edge != null) {
+                Vertex<GeneralBase> startVertex = edge.getStart();
+                Vertex<GeneralBase> endVertex = edge.getEnd();
+                if(startVertex != null && endVertex != null) {
+                    GeneralBase start = startVertex.getContent();
+                    GeneralBase end = endVertex.getContent();
+                    g2d.setColor(Color.black);
+                    g2d.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
+                    if(edge.getWeight().getFront() != null) {
+                        List<Unit> units = edge.getWeight().getAllUnits();
+                        int gap = (start.getX() - end.getX())/Utils.altSize(units);
+
+                        int x = (start.getX() + (gap) - Constants.UNIT_IMG_HEIGHT/2);
+                        int y = (start.getY() + (gap) - Constants.UNIT_IMG_WIDTH/2);
+                        for (units.toFirst();units.hasAccess();units.next()){
+
+                            edge.getWeight().getFront().draw(g2d, x, y);
+                            x = x + gap;
+                            y = y + gap;
+                        }
                     }
                 }
             }
