@@ -14,6 +14,8 @@ public class Popup implements IDrawableObject {
     private int x;
     private int y;
 
+    private int speed;
+
     private String text;
     private Font font;
 
@@ -26,7 +28,7 @@ public class Popup implements IDrawableObject {
 
     private ICanvas canvas;
 
-    public Popup(int x, int y, String text, Font font, int r, int g, int b){
+    public Popup(int x, int y, String text, Font font, int r, int g, int b, int speed){
         this.x = x;
         this.y = y;
         this.text = text;
@@ -36,6 +38,7 @@ public class Popup implements IDrawableObject {
         this.b = b;
         this.a = 255;
         //color = new Color(0,0,0);
+        this.speed = speed;
     }
 
     /**
@@ -47,16 +50,19 @@ public class Popup implements IDrawableObject {
         g2d.setFont(font);
         g2d.setColor(new Color(r,g,b,a));
         g2d.drawString(text,x,y);
-        if(a > 0){
-            a--;
+        if(a > 0 && speed <= a){
+            a -= speed;
         }else if(a == 0){
             //removeObject
+        }
+        if(a < speed){
+            a = 0;
         }
     }
 
     @Override
     public void update(double dt) {
-        //System.out.println(a);
+        System.out.println(a);
     }
 
     @Override
